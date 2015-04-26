@@ -1,0 +1,14 @@
+=Prof X task machine. 
+
+I've created this repo in order to enhance my skills in jQuery, CSS and Rails
+
+functionality: 
+1. Create a group.
+2. Assign heroes to group. 
+3. Delete hero from the group. 
+4. Assign task to the group.
+
+to do: 
+1. Create a separate div to display tasks and teams in readable manner.
+2. Refactor js, css and html. Separate them to the different files. My eyes bleed when I look at this solid piece of crap. 
+3. Develop design which would be less scary.

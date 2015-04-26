@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="us">
+<head>
+	<meta charset="utf-8">
+	<title>jQuery UI Example Page</title>
+	<link href="jquery-ui.css" rel="stylesheet">
+	<style>	
+	.main_content{
+		width:100;
+		overflow:auto;
+		background-color: #777;
+	}
+
+	.left_col{
+		width:75%;
+		float:left;
+	}
+	.right_col{
+		width:25%;
+		float:left;
+	}
+
+	.member{
+		float:left;
+	}
+
+	.footer{
+		height:100px;
+		width:100%;
+		background-color: black;
+		color:white;
+	}
+	.group{
+		width:700px;
+		height:auto;
+		border:1px solid black;
+	}
+	.mutant{
+		height:100px;
+		width:100px;
+		border:1px solid black;
+	}
+	.member{
+		height:200px;
+		width:200px;
+		border:1px solid black;
+	}
+	.members{
+		overflow:auto;
+	}
+
+
+	</style>
+</head>
+<body>
+<div class="main_content">
+<h1>Welcome to jQuery UI!</h1>
+<div class="left_col">
+	<button id="new_group" class="butt" >Add a new group</button>
+	<div class="groups">
+		<div class="group" id="group_1">
+			<div class="task_container">
+				<button class="butt" id="dedup_button">dedup</button>
+			</div>
+			<div class="members">
+				
+			</div>
+			<div  style="clear:both"></div>
+			<div class="assign_container">
+				<button class="butt">Assign task</button>
+			</div>
+		</div>
+
+		<div class="group" id="group_2">
+			<div class="task_container">
+				<button class="butt">Show tasks</button>
+			</div>
+			<div class="members">
+				
+			</div>
+			<div  style="clear:both"></div>
+			<div class="assign_container">
+				<button class="butt">Assign task</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="right_col">
+	<div class="mutant" id="wolverine">
+		<img src="wolverine.jpg" style="height:50px;width:50px;"/>
+		<p>Wolverine</p>	
+	</div>
+	<div class="mutant" id="tor">
+		<img src="tor.jpg" style="height:50px;width:50px;"/>
+		<p>Tor</p>	
+	</div>
+	<div class="mutant" id="hawk">
+		<img src="hawk.jpg" style="height:50px;width:50px;"/>
+		<p>Hawk</p>	
+	</div>
+	<div class="mutant" id="stark">
+		<img src="stark.jpg" style="height:50px;width:50px;"/>
+		<p>Tony Stark</p>	
+	</div>
+	<div class="mutant" id="batman">
+		<img src="batman.jpg" style="height:50px;width:50px;"/>
+		<p>Batman</p>	
+	</div>
+</div>
+<div  style="clear:both"></div>
+<div  class="footer">
+	<p>All rights reserved</p>
+</div>
+</div>
+
+
+<button id="button">A button element</button>
+<script src="external/jquery/jquery.js"></script>
+<script src="jquery-ui.js"></script>
+<script>
+
+//Допущение - один мутант может быть одновременно в составе только одной группы!!!
+var group = [];
+var group_counter = 2;
+
+$( ".mutant" ).draggable({revert:true});
+$( ".butt" ).button();
+$( "#new_group" ).button();
+refreshDroppables();
+
+$("#new_group").click(function(){
+	alert("fuck!");
+	group_counter++;
+	$(".groups").append("<div class=\"group\" id=\"group_"+group_counter+"\"><div class=\"task_container\">\
+				<button class=\"butt\" >Show tasks</button>\
+			</div>\
+			<div class=\"members\"></div>\
+			<div  style=\"clear:both\"></div>\
+			<div class=\"assign_container\">\
+				<button class=\"butt\">Assign task</button>\
+			</div>\
+	</div>");
+	
+	$( ".butt" ).button();
+	refreshDroppables();
+
+});
+
+$("#dedup_button").click(function(){
+  		alert("Fuck!");
+	    var result = dedup("tor");
+	   
+	    alert("What was returned: "+result.toString());
+	    if(result==true){
+	    	alert("Tor found");
+	    } else
+	    {
+	    	alert("Tor was not found");
+	    };
+  });
+
+//Delete the hero from a group
+function delete_click(){
+		var clicked_hero_id =$(this).parent().attr("id");
+		var clicked_hero_id_sharp = "#"+clicked_hero_id;
+		var clicked_group_id ="#"+$(this).parent().parent().parent().attr("id");
+
+		var index_of_deleted_element= group.indexOf(clicked_hero_id);
+		alert("index_of_deleted_element "+index_of_deleted_element);
+
+		$(clicked_hero_id_sharp).remove();	
+		group.splice(index_of_deleted_element, 1);
+	};
+
+//Deduplication. Old function.Not used. 
+function dedup(hero_id){
+  var bool_ret=false;
+  $.each($(".group"),function(){
+  						var t=$(this).attr("id");  						
+  						t='#'+t+' .member';  
+  						//alert($(".group").html());
+  						//дублей нет						
+  		   			    $.each($(t), function(){
+  		   			    	alert("member_id "+$(this).attr("id"));
+  		   			    	alert("hero_id "+ hero_id);
+
+  		   			    	if($(this).attr("id")==hero_id){
+  		   			    		$(this).css("color","red");
+  		   			    		bool_ret = true;
+  		   			    		
+  		   			    	}  	 	
+  		   			    });
+  		   			  
+  		   			    return bool_ret;
+  		   			  
+ 							  })
+	 return bool_ret;
+	};
+
+function refreshDroppables(){
+
+	$( ".group" ).droppable({accept:".mutant",activeClass:"drags"},
+	{drop:
+		function(event, ui) {
+
+			  var draggableId = ui.draggable.attr("id");
+			  var droppableId = $(this).attr("id");
+			  var temp_img= $(this).children('.members').find('img').attr("src");
+			  var member = draggableId;
+
+			  $(this).addClass("ui-state-highlight");			
+			  //alert("Group length != 0  "+(group.length!=0).toString());
+
+			  //alert("Group indexOf member != -1"+(group.members.indexOf(member)!=-1).toString());
+			  //alert("Такого элемента еще нет: "+(group.indexOf(member)==-1).toString())
+			  if ((group.indexOf(member)==-1))
+			  {
+
+			  	 group.push(member);
+			  	 
+			  	  $(this).children('.members').append("<div class=\'member\' id=\'"+member+"\'><img src=\'"+member+".jpg\' style=\'height:100px;width:100px;\'/><p>"+member+"</p><button id=\'"+member+"_delete_button\'>Delete from group</button></div>");  
+			  	  var button_id= "#"+member+"_delete_button";
+			  	  $(button_id).button();
+			  	  $(button_id).on("click",delete_click );
+			  }
+			  else
+			  {
+			  	alert("Воу-воу! Этот мутант уже занят!");
+
+			  };
+	}});
+
+};
+
+
+
+
+
+
+ 	
+	
+
+</script>
+</body>
+</html>
+

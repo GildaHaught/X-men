@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="us">
+<head>
+	<meta charset="utf-8">
+	<title>jQuery UI Example Page</title>
+	<link href="jquery-ui.css" rel="stylesheet">
+	<style>	
+	h1, h3 {
+		font-family: Georgia;
+		color:white;
+	}
+	
+	.main_content{
+		width:100%;
+		overflow:auto;
+		position:relative;
+		background-color: #6E0D0D;
+	}
+
+	.left_col{
+		width:74%;
+		float:left;
+		background-color: orange;
+		border-top: 4px solid black;
+		border-bottom: 4px solid black;
+		border-right: 4px solid black;
+
+	}
+	.right_col{
+		width:24%;
+		float:left;		
+		background-color: #6E4A39;
+		border: 4px solid black;
+
+	}
+
+	.member{
+		float:left;
+
+	}
+
+	.footer{
+		height:100px;
+		width:100%;
+		background-color: black;
+		color:white;
+	}
+	.group{
+		width:606px;
+		height:auto;
+		border:1px solid black;
+		margin: 0 auto;
+		margin-bottom:10px;
+	}
+	.groups
+	{
+		margin-top: 10px;
+		margin-bottom: 10px;
+
+	}
+
+	.mutant{
+		height:100px;
+		width:100px;
+		border:1px solid black;
+		margin:0 auto;
+		margin-top:10px;
+		margin-bottom:10px;
+	}
+
+	.mutant img{
+		height:100px;
+		width:100px;
+		 position:absolute;
+    	 left:0;
+    	 top:0;
+	}
+
+	
+
+	.mutant:hover{
+		border-color: red;
+	}
+	.member{
+		float:left;
+		height:200px;
+		width:200px;
+		border:1px solid black;
+		position:relative;
+	}
+
+	.member img{
+		height:200px;
+		width:200px;
+		 position:absolute;
+    	 left:0;
+    	 top:0;
+		
+	}
+	.member p{
+		z-index:100;
+	    position:absolute;    
+	    color:white;
+	    font-size:38px;
+	    font-weight:bold;
+	    left:10px;
+	    top:150px;
+	    font-family: Arial;
+
+	    text-shadow: black 1px 0px, black 1px 1px, black 0px 1px, black -1px 1px, black -1px 0px, black -1px -1px, black 0px -1px, black 1px -1px, black 0 0 3px, black 0 0 3px, black 0 0 3px, black 0 0 3px, black 0 0 3px, black 0 0 3px, black 0 0 3px, black 0 0 3px;
+	}
+
+	.member button{
+		z-index:100;
+		color:red;
+		text-align: right;
+	   
+			
+	}
+	.members{
+		overflow:auto;
+		background-color: #6E0D0D;
+	}
+	.butt{
+		width:100%;
+	}
+
+	.task_editor
+	{
+
+		display:none;
+		background-color: white;
+	}
+
+	  p {
+		margin-top:0;
+		margin-bottom:0;
+	}
+	.assign_tasks  p textarea{
+		border: 1px solid #6E0D0D;
+		width:99%;
+	}
+
+	.show_task_editor{
+		width:100%;
+	}
+
+	.task_ok_button{
+		width:100%;
+	}
+
+	
+
+	.header {
+		width:100%;
+		display: inline;
+	}
+	.header img {
+		width:  200px;
+		height: 200px;
+		float:left;
+	}
+
+
+	</style>
+</head>
+<body>
+<div class="main_content">
+<div class="header">
+	<img src="evolution.jpg" />
+	<h1>Welcome, prof X! </h1>
+	<h3>1. Add a new group</h3>
+	<h3>2. Drag your hero from the left col to the "Assign task" button</h3>
+	<h3>3. Assign a task to the group!</h3>
+	<div  style="clear:both"></div>
+</div>
+<div class="right_col">
+	<div class="mutant" id="wolverine">
+		<img src="wolverine.jpg" />
+			
+	</div>
+	<div class="mutant" id="tor">
+		<img src="tor.jpg" />
+		
+	</div>
+	<div class="mutant" id="hawk">
+		<img src="hawk.jpg" />
+		
+	</div>
+	<div class="mutant" id="stark">
+		<img src="stark.jpg" />
+		
+	</div>
+	<div class="mutant" id="batman">
+		<img src="batman.jpg" />
+		
+	</div>
+</div>
+<div class="left_col">
+	<button id="new_group" class="butt" >Add a new group</button>
+	
+	
+		 <div class="groups">
+		 		
+		 </div>
+
+	
+	<!--<div class="groups">
+		    <div class="group" id="group_1">
+			<div class="task_container">
+				
+			</div>
+			<div class="members" >
+				<div class='member' id='tor' style="display:none"><img src='tor.jpg' style='height:100px;width:100px;'/>
+				<p>Tor</p><button id='tor_delete_button'>Delete from group</button></div>	
+
+				<div class='member' id='stark' style="display:none"><img src='stark.jpg' style='height:100px;width:100px;'/>
+				<p>Stark</p><button id='stark_delete_button'>Delete from group</button></div>	
+
+				<div class='member' id='hawk' style="display:none"><img src='hawk.jpg' style='height:100px;width:100px;'/>
+				<p>Hawk</p><button id='hawk_delete_button'>Delete from group</button></div>	
+
+				<div class='member' id='wolverine' style="display:none"><img src='wolverine.jpg' style='height:100px;width:100px;'/>
+				<p>Wolverine</p><button id='wolverine_delete_button'>Delete from group</button></div>	
+
+				<div class='member' id='batman' style="display:none"><img src='batman.jpg' style='height:100px;width:100px;'/>
+				<p>Batman</p><button id='batman_delete_button'>Delete from group</button></div>	
+			</div>
+			<div  style="clear:both"></div>
+			<div class="assign_container">
+				<button class="butt" id="assign_task">Assign task</button>
+				<div class ="task_editor">
+					<div class="assigned_tasks">
+						<ol class="tasks">
+							<li>Go shopping to the Walmart;</li>
+						</ol>	
+					</div>
+					<div class="assign_tasks">
+						 
+						    <p><b>Assign a task for your mighty heroes:</b></p>
+						    <p><textarea rows="10" cols="45" name="text"></textarea></p>
+						    <p><button id="assign_task_button" >OK</button></p>
+						 
+					</div>
+				</div>	
+			</div>
+		</div>
+
+	</div>-->
+</div>
+
+<div  style="clear:both"></div>
+<div  class="footer">
+	<p>All rights reserved</p>
+</div>
+</div>
+
+
+<button id="button">A button element</button>
+<script src="external/jquery/jquery.js"></script>
+<script src="jquery-ui.js"></script>
+<script>
+
+//Допущение - один мутант может быть одновременно в составе только одной группы!!!
+var group = [];
+var group_counter = 0;
+
+$( ".mutant" ).draggable({revert:true});
+$("#assign_task_button").button();
+$( ".butt" ).button();
+$( "#accordion" ).accordion();
+$( "#new_group" ).button();
+refreshDroppables();
+
+
+
+//$(".show_task_editor").click(function(){
+//	alert("fuck!");
+//	$(".task_editor").toggle("slow");
+
+//});
+
+$("#new_group").click(function(){
+	
+	group_counter++;
+	$(".groups").append("<div class=\"group\" id=\"group_"+group_counter+"\" ><div class=\"task_container\">\
+			</div>\
+			<div class=\"members\" >\
+							<div class=\'member\' id=\'tor\' style=\"display:none\"><img src=\'tor.jpg\' />\
+							<p>Tor</p><button class=\'delete_button\'>X</button></div>\
+						    <div class=\'member\' id=\'stark\' style=\"display:none\"><img src=\'stark.jpg\' />\
+							<p>Stark</p><button class=\'delete_button\'>X</button></div>\
+							<div class=\'member\' id=\'hawk\' style=\"display:none\"><img src=\'hawk.jpg\' />\
+							<p>Hawk</p><button class=\'delete_button\'>X</button></div>\
+							<div class=\'member\' id=\'wolverine\' style=\"display:none\"><img src=\'wolverine.jpg\' />\
+							<p>Wolverine</p><button class=\'delete_button\'>X</button></div>\
+							<div class=\'member\' id=\'batman\' style=\"display:none\"><img src=\'batman.jpg\' />\
+							<p>Batman</p><button class=\'delete_button\'>X</button></div>\
+			</div>\
+			<div  style=\"clear:both\"></div>\
+			<div class=\"assign_container\">\
+				<button class=\"show_task_editor\">Assign task</button>\
+				<div class =\"task_editor\">\
+					<div class=\"assigned_tasks\">\
+						<p>Task to accomplish:</p>\
+						<ol class=\"tasks\">\
+							<li>Go shopping to the Walmart;</li>\
+						</ol>\
+					</div>\
+					<div class=\"assign_tasks\">\
+						    <p>Assign a task for your mighty heroes:</p>\
+						    <p><textarea class=\"task_text\" rows=\"5\" cols=\"10\" name=\"text\"></textarea></p>\
+						    <p><button class=\"task_ok_button\" id=\"assign_task_button_"+group_counter+"\" >OK</button></p>\
+					</div>\
+				</div>\
+			</div>\
+	</div>");
+	
+	var group_id ="#group_"+group_counter;
+	var members=".members";
+	var member=".member";
+	var query_path_members = group_id+" "+members+" "+member+" "+".delete_button";
+	var task_editor_path=group_id+" "+".assign_container"+" "+".show_task_editor";
+	var assign_button_path ="#"+"assign_task_button_"+group_counter;
+
+	alert(assign_button_path);
+	
+	$(query_path_members).button();	
+	$(query_path_members).on("click",delete_click );
+
+	//$( ".butt" ).button();
+	$(task_editor_path).button();
+	$(task_editor_path).on("click",show_task_editor );
+
+	$(assign_button_path).button();
+	$(assign_button_path).on("click",assign_task );
+
+	refreshDroppables();
+
+});
+
+function show_task_editor()
+{
+	 var clicked_group_id ="#"+$(this).parent().parent().attr("id");
+	 var clicked_assign_container_id="."+$(this).parent().attr("class");
+	 var query_string = clicked_group_id+" "+clicked_assign_container_id+" .task_editor";
+	// alert(query_string);
+	 //alert(clicked_assign_container_id);
+	$(query_string).toggle("slow");
+
+}
+
+function assign_task(){
+
+	//alert($(this).parent().parent().attr("class"));
+	var assign_tasks_div=$(this).parent().parent();
+	new_task_text= $(assign_tasks_div).find("textarea").val();
+	$(assign_tasks_div).parent().find("ol").append("<li>"+new_task_text+"</li>");
+	//alert(query_tasks);
+	//var task_text=$(query_textarea).val();
+	//$(query_tasks).append("<li>"+task_text+"</li>");
+
+};
+
+$("#dedup_button").click(function(){
+  		alert("Fuck!");
+	    var result = dedup("tor");
+	   
+	    alert("What was returned: "+result.toString());
+	    if(result==true){
+	    	alert("Tor found");
+	    } else
+	    {
+	    	alert("Tor was not found");
+	    };
+  });
+
+//Delete the hero from a group
+function delete_click(){
+		 var clicked_hero_id =$(this).parent().attr("id");
+		 var clicked_hero_id_sharp ="#"+$(this).parent().attr("id");
+		
+		 var clicked_group_id ="#"+$(this).parent().parent().parent().attr("id");
+		
+		 var full_id = clicked_group_id+" "+clicked_hero_id_sharp;
+		 
+		  $(full_id).css("display","none");
+		
+	};
+
+//Deduplication. Old function.Not used. 
+function dedup(hero_id){
+  var bool_ret=false;
+  $.each($(".group"),function(){
+  						var t=$(this).attr("id");  						
+  						t='#'+t+' .member';  
+  						//alert($(".group").html());
+  						//дублей нет						
+  		   			    $.each($(t), function(){
+  		   			    	alert("member_id "+$(this).attr("id"));
+  		   			    	alert("hero_id "+ hero_id);
+
+  		   			    	if($(this).attr("id")==hero_id){
+  		   			    		$(this).css("color","red");
+  		   			    		bool_ret = true;
+  		   			    		
+  		   			    	}  	 	
+  		   			    });
+  		   			  
+  		   			    return bool_ret;
+  		   			  
+ 							  })
+	 return bool_ret;
+	};
+
+	function refreshDroppables(){
+		$( ".group" ).droppable({accept:".mutant",activeClass:"drags"},
+				{drop:
+					function(event, ui) {
+
+					var draggableId = ui.draggable.attr("id");
+			  		var droppableId = $(this).attr("id");
+			    	
+			    	var selector_string="#"+droppableId+" #"+draggableId;
+			    	//alert(selector_string);
+			    	$(selector_string).css("display","block");
+
+
+				}
+			});
+
+	};
+
+/*function refreshDroppables(){
+
+	$( ".group" ).droppable({accept:".mutant",activeClass:"drags"},
+	{drop:
+		function(event, ui) {
+
+			  var draggableId = ui.draggable.attr("id");
+			  var droppableId = $(this).attr("id");
+			  var temp_img= $(this).children('.members').find('img').attr("src");
+			  var member = draggableId;
+
+			  $(this).addClass("ui-state-highlight");			
+			  //alert("Group length != 0  "+(group.length!=0).toString());
+
+			  //alert("Group indexOf member != -1"+(group.members.indexOf(member)!=-1).toString());
+			  //alert("Такого элемента еще нет: "+(group.indexOf(member)==-1).toString())
+			  if ((group.indexOf(member)==-1))
+			  {
+
+			  	 group.push(member);
+			  	 
+			  	  $(this).children('.members').append("<div class=\'member\' id=\'"+member+"\'><img src=\'"+member+".jpg\' style=\'height:100px;width:100px;\'/><p>"+member+"</p><button id=\'"+member+"_delete_button\'>Delete from group</button></div>");  
+			  	  var button_id= "#"+member+"_delete_button";
+			  	  $(button_id).button();
+			  	  $(button_id).on("click",delete_click );
+			  }
+			  else
+			  {
+			  	alert("Воу-воу! Этот мутант уже занят!");
+
+			  };
+	}});
+
+};*/
+
+
+
+
+
+
+ 	
+	
+
+</script>
+</body>
+</html>
+
